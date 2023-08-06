@@ -1,21 +1,18 @@
-import "./styles.css";
+let inputField = document.querySelector('#input');
+let buttons = document.querySelectorAll('.button');
 
-document.getElementById("app").innerHTML = ``;
+buttons.forEach(button => {
+  button.addEventListener('click', (e) => {
+    let buttonText = e.target.innerHTML;
 
-let string = "";
-let buttons = document.querySelectorAll(".button");
-Array.from(buttons).forEach((button) => {
-  button.addEventListener("click", (e) => {
-    if (e.target.innerHTML == "=") {
-      string = eval(string);
-      document.querySelector("input").value = string;
-    } else if (e.target.innerHTML == "AC") {
-      string = "";
-      document.querySelector("input").value = string;
+    if (buttonText === "=") {
+      inputField.value = eval(inputField.value);
+    } else if (buttonText === "AC") {
+      inputField.value = "";
+    } else if (buttonText === "←") {
+      inputField.value = inputField.value.slice(0, -1);
     } else {
-      console.log(e.target);
-      string = string + e.target.innerHTML;
-      document.querySelector("input").value = string;
+      inputField.value += buttonText;
     }
   });
 });
